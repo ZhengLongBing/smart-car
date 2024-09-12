@@ -118,7 +118,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    INSTRUCTION_Listen();
   }
   /* USER CODE END 3 */
 }
