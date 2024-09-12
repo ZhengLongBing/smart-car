@@ -3,8 +3,6 @@
 //
 #include "ultrasound.h"
 
-#include <stdio.h>
-
 
 void ULTRASOUND_Init(Ultrasound * ultrasound) {
     HAL_TIM_Base_Start(ultrasound->echo_htim);
@@ -21,15 +19,16 @@ void ULTRASOUND_Trig(Ultrasound * ultrasound) {
 }
 
 
-__weak void ULTRASOUND_RangingCpltCallback(Ultrasound * ultrasound,TIM_HandleTypeDef *htim) {}
-__weak void ULTRASOUND_RangingErrorCallback(Ultrasound * ultrasound,TIM_HandleTypeDef *htim){}
+__weak void ULTRASOUND_RangingCpltCallback(Ultrasound * ultrasound) {}
+__weak void ULTRASOUND_RangingErrorCallback(Ultrasound * ultrasound){}
+
 
 void ULTRASOUND_IT(Ultrasound * ultrasound,TIM_HandleTypeDef *htim) {
     if(htim == ultrasound->echo_htim&& htim->Channel == ultrasound->echo_falling_active_channel ) {
         if (ultrasound->ranging.state == Init || ultrasound->ranging.state == Error ) {
             ultrasound->ranging.state = Error;
-            ultrasound->ranging.value.error = "未触发trig,echo有抖动！\n";
-            ULTRASOUND_RangingErrorCallback(ultrasound,htim);
+            ultrasound->ranging.value.error = "未触发trig,echo电平信号抖动！\n";
+            ULTRASOUND_RangingErrorCallback(ultrasound);
         }else {
             ultrasound->ranging.state = Distance;
             const uint16_t rising = HAL_TIM_ReadCapturedValue(ultrasound->echo_htim,ultrasound->echo_rising_channel);
@@ -39,7 +38,7 @@ void ULTRASOUND_IT(Ultrasound * ultrasound,TIM_HandleTypeDef *htim) {
             }else {
                 ultrasound->ranging.value.distance = (ultrasound->counter_period + falling - rising)*0.034/2.0;
             }
-            ULTRASOUND_RangingCpltCallback(ultrasound,htim);
+            ULTRASOUND_RangingCpltCallback(ultrasound);
         }
     }
 }

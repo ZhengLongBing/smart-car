@@ -60,7 +60,4 @@ Car CAR = {
 };
 
 
-// 超声波测距
-void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) {
-    ULTRASOUND_IT(&ULTRASOUND,htim);
-}
+

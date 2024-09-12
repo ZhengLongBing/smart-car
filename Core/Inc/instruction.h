@@ -26,20 +26,22 @@
 #define SERVO_Angle_180 12
 
 #define ULTRASOUND_Randing 13
+#define MODE_Free 14
+#define MODE_Auto 15
 
 */
 
+
 typedef enum {
-    Unused,
-    Used,
-}UseState;
+    Free,
+    Auto
+}ModeState;
 
 extern uint8_t INSTRUCTION;
-extern UseState USE_STATE;
-
+extern ModeState MODE_STATE;
 
 void INSTRUCTION_Init(void);
 void INSTRUCTION_Listen();
-
+void INSTRUCTION_IT(UART_HandleTypeDef *huart);
 
 #endif //INSTRUCTION_H

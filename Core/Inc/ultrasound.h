@@ -44,7 +44,7 @@ void ULTRASOUND_Trig(Ultrasound * ultrasound);
 void ULTRASOUND_IT(Ultrasound * ultrasound,TIM_HandleTypeDef *htim);
 
 //完成测距的回调 自己实现逻辑
-void ULTRASOUND_RangingCpltCallback(Ultrasound * ultrasound,TIM_HandleTypeDef *htim);
+void ULTRASOUND_RangingCpltCallback(Ultrasound * ultrasound);
 //测距错误的回调 自己实现逻辑
-void ULTRASOUND_RangingErrorCallback(Ultrasound * ultrasound,TIM_HandleTypeDef *htim);
+void ULTRASOUND_RangingErrorCallback(Ultrasound * ultrasound);
 #endif //ULTRASOUND_H
