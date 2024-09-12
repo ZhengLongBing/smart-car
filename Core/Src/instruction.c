@@ -14,11 +14,11 @@ void INSTRUCTION_Init(void) {
     ULTRASOUND_Init(&ULTRASOUND);
     CAR_Init(&CAR);
     RedirectInit(&BLUETOOTH_HUART);
+    BLUETOOTH_Read(&BLUETOOTH,&INSTRUCTION,1);
 }
 
 
 void INSTRUCTION_Listen() {
-    BLUETOOTH_Read(&BLUETOOTH,&INSTRUCTION,1);
     while(1) {
         HAL_Delay(1);
         if (USE_STATE == Unused) {
@@ -104,7 +104,7 @@ void INSTRUCTION_Listen() {
     }
 }
 
-void CAR_Drive(){}
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
     if (huart == &BLUETOOTH_HUART) {
         USE_STATE = Unused;

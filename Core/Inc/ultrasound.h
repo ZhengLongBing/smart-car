@@ -43,5 +43,8 @@ void ULTRASOUND_Trig(Ultrasound * ultrasound);
 // !!! 将该函数放入回调函数 HAL_TIM_IC_CaptureCallback 中。
 void ULTRASOUND_IT(Ultrasound * ultrasound,TIM_HandleTypeDef *htim);
 
-
+//完成测距的回调 自己实现逻辑
+void ULTRASOUND_RangingCpltCallback(Ultrasound * ultrasound,TIM_HandleTypeDef *htim);
+//测距错误的回调 自己实现逻辑
+void ULTRASOUND_RangingErrorCallback(Ultrasound * ultrasound,TIM_HandleTypeDef *htim);
 #endif //ULTRASOUND_H
