@@ -155,7 +155,7 @@ void MODE_Free(uint8_t instruction) {
 void MODE_Auto(void * arg) {
     while(1) {
         SERVO_SetAngle(&SERVO,Angle90);
-        vTaskDelay(500);
+        vTaskDelay(1000);
         ULTRASOUND_Trig(&ULTRASOUND);
         CAR_Forward(&CAR);
         while(1) {
@@ -168,7 +168,7 @@ void MODE_Auto(void * arg) {
         }
         float  distance;
         SERVO_SetAngle(&SERVO,Angle180);
-        vTaskDelay(500);
+        vTaskDelay(1000);
         xQueueReceive(DISTANCE_QUEUE,&distance,portMAX_DELAY);
         if(distance > 15.0) {
             CAR_TurnLeft(&CAR);
@@ -177,7 +177,7 @@ void MODE_Auto(void * arg) {
             continue;
         }
         SERVO_SetAngle(&SERVO,Angle0);
-        vTaskDelay(500);
+        vTaskDelay(1000);
         xQueueReceive(DISTANCE_QUEUE,&distance,portMAX_DELAY);
         if(distance > 15.0) {
             CAR_TurnRight(&CAR);
