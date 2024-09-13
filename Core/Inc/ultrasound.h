@@ -7,6 +7,17 @@
 
 #include "stm32f1xx_hal.h"
 
+
+/// trig引脚：
+/// 设置为定时器为 One Pulse Mode
+/// 通道模式为 PWM mode 2
+/// 通道极性为 High
+/// echo引脚：
+/// 设置定时器两个通道为输入捕获模式
+/// 一个通道为直接模式 上升沿触发
+/// 一个通道为间接模式 下降沿触发
+
+
 typedef enum {
     Init,
     Start,
@@ -32,7 +43,7 @@ typedef struct {
     uint32_t echo_falling_channel;
     int echo_rising_active_channel;
     int echo_falling_active_channel;
-    // 设置对应定时器arr的值
+    // 设置echo对应定时器arr的值
     uint16_t counter_period;
     Ranging ranging;
 }Ultrasound;
